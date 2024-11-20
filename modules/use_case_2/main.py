@@ -14,8 +14,12 @@ class ServiceRunner(dl.BaseServiceRunner):
         Upload prompts from CSV file to Dataloop dataset using CSV reader
 
         Args:
-            item (dl.Item): Dataloop item
+            csv_path (str): Path to the CSV file
+            dataset (dl.Dataset): Dataloop dataset object
         """
+        import csv
+        import os
+        import time
 
         # CSV column indexes (based on the provided CSV structure)
         SITE_ID_INDEX = 0  # Site Identifier column
@@ -25,22 +29,22 @@ class ServiceRunner(dl.BaseServiceRunner):
 
         dataset = item.dataset
         csv_path = item.download()
+        csv_filename = os.path.splitext(os.path.basename(csv_path))[0]
+        folder_path = f'/{csv_filename}'
+        dataset.items.make_dir(directory=folder_path)
         with open(csv_path, "r") as file:
             csv_reader = csv.reader(file)
 
             # Process each row
             for row_num, row in enumerate(csv_reader):
                 try:
-                    # Skip empty rows or rows with missing essential data
-                    if len(row) < 5 or not row[SITE_ID_INDEX] or not row[URL_INDEX]:
-                        continue
                     if row_num == 0:
                         print(f"Skipping header row: {row}")
                         continue
 
                     # Create prompt item
                     prompt_item = dl.PromptItem(name=row[SITE_ID_INDEX])
-                    item = dataset.items.upload(prompt_item, overwrite=True)
+                    item = dataset.items.upload(prompt_item, remote_path=folder_path, overwrite=True)
                     prompt_item = dl.PromptItem.from_item(item)
 
                     # Add URL prompt
@@ -56,7 +60,7 @@ class ServiceRunner(dl.BaseServiceRunner):
                         },
                         prompt_key="1",
                     )
-
+                    time.sleep(0.5)
                     # Add type selection prompt
                     prompt_item.add(
                         message={
@@ -70,7 +74,7 @@ class ServiceRunner(dl.BaseServiceRunner):
                         },
                         prompt_key="2",
                     )
-
+                    time.sleep(0.5)
                     # Add type options
                     if row[TYPES_INDEX]:
                         for type_option in row[TYPES_INDEX].split("\n"):
@@ -87,6 +91,7 @@ class ServiceRunner(dl.BaseServiceRunner):
                                     },
                                     prompt_key="2",
                                 )
+                                time.sleep(0.5)
 
                     # Add category selection prompt
                     prompt_item.add(
@@ -101,6 +106,7 @@ class ServiceRunner(dl.BaseServiceRunner):
                         },
                         prompt_key="3",
                     )
+                    time.sleep(0.5)
 
                     # Add category options
                     if row[CATEGORIES_INDEX]:
@@ -118,6 +124,7 @@ class ServiceRunner(dl.BaseServiceRunner):
                                     },
                                     prompt_key="3",
                                 )
+                                time.sleep(0.5)
 
                     # Add metadata
                     metadata = {"msid": row[SITE_ID_INDEX]}
