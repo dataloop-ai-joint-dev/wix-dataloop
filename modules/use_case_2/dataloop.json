@@ -93,6 +93,40 @@
           }
         ]
       }
+    ],
+    "triggers": [
+      {
+        "name": "use-case-2-on-item",
+        "active": true,
+        "type": "Event",
+        "namespace": "services.process-csv-use-case-2-service",
+        "spec": {
+          "filter": {
+            "$and": [
+              {
+                "metadata.system.mimetype": "text/csv",
+                "datasetId": "673ce1c48f7fb037610b4438"
+              },
+              {
+                "hidden": false
+              },
+              {
+                "type": "file"
+              }
+            ]
+          },
+          "executionMode": "Always",
+          "resource": "Item",
+          "actions": [
+            "Created"
+          ],
+          "input": {},
+          "operation": {
+            "type": "function",
+            "functionName": "process_csv_use_case_2"
+          }
+        }
+      }
     ]
   }
 }

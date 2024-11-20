@@ -1,21 +1,12 @@
 import dtlpy as dl
 import logging
+import csv
+import os
 
 logger = logging.getLogger(name="dtlpy")
 
 
 class ServiceRunner(dl.BaseServiceRunner):
-    """
-    Package runner class
-
-    """
-
-    def __init__(self):
-        """
-        Init package attributes here
-
-        :return:
-        """
 
     @staticmethod
     def process_csv_use_case_2(item: dl.Item):
@@ -23,12 +14,8 @@ class ServiceRunner(dl.BaseServiceRunner):
         Upload prompts from CSV file to Dataloop dataset using CSV reader
 
         Args:
-            csv_path (str): Path to the CSV file
-            dataset (dl.Dataset): Dataloop dataset object
+            item (dl.Item): Dataloop item
         """
-
-        import csv
-        import os
 
         # CSV column indexes (based on the provided CSV structure)
         SITE_ID_INDEX = 0  # Site Identifier column
