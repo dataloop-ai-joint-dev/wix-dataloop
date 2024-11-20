@@ -33,7 +33,7 @@
           "runnerImage": "dataloopai/dtlpy-agent:cpu.py3.10.opencv",
           "concurrency": 1,
           "autoscaler": {
-            "minReplicas": 0,
+            "minReplicas": 1,
             "maxReplicas": 2,
             "queueLength": 10
           }
