@@ -1,6 +1,6 @@
 {
   "displayName": "Use Case 2 CSV Converter",
-  "name": "process_csv_use_case_2",
+  "name": "use_case_2",
   "scope": "project",
   "version": "0.0.1",
   "description": "Converts Use Case 2 CSV files to Prompt Items",
@@ -21,9 +21,10 @@
     "gitTag": "0.0.1"
   },
   "components": {
-    "computeConfigs": [
+    "services": [
       {
-        "name": "process-csv-use-case-2-service",
+        "name": "use-case-2",
+        "moduleName": "use_case_2_module",
         "versions": {
           "dtlpy": "1.99.7"
         },
@@ -43,7 +44,7 @@
       {
         "invoke": {
           "type": "function",
-          "namespace": "process-csv-use-case-2-service.process_csv_use_case_2_module.process_csv_use_case_2"
+          "namespace": "use-case-2.use_case_2_module.process_csv_use_case_2"
         },
         "name": "process_csv_use_case_2",
         "categories": [],
@@ -76,8 +77,7 @@
     ],
     "modules": [
       {
-        "name": "process_csv_use_case_2_module",
-        "computeConfig": "process-csv-use-case-2",
+        "name": "use_case_2_module",
         "entryPoint": "modules/use_case_2/main.py",
         "className": "ServiceRunner",
         "initInputs": [],
@@ -102,7 +102,7 @@
         "name": "use-case-2-on-item",
         "active": true,
         "type": "Event",
-        "namespace": "process-csv-use-case-2-service.process_csv_use_case_2_module.process_csv_use_case_2",
+        "namespace": "services.use-case-2",
         "spec": {
           "filter": {
             "$and": [
