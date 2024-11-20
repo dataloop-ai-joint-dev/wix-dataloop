@@ -1,0 +1,98 @@
+{
+  "displayName": "Use Case 2 CSV Converter",
+  "name": "process_csv_use_case_2",
+  "scope": "project",
+  "version": "0.0.1",
+  "description": "Converts Use Case 2 CSV files to Prompt Items",
+  "attributes": {
+    "Category": "Application",
+    "Provider": "Dataloop",
+    "Deployed By": "Dataloop",
+    "Application Type": [
+      "Pipeline Node"
+    ],
+    "Media Type": [
+      "Text"
+    ]
+  },
+  "codebase": {
+    "type": "git",
+    "gitUrl": "https://github.com/dataloop-ai-joint-dev/wix-dataloop",
+    "gitTag": "0.0.1"
+  },
+  "components": {
+    "computeConfigs": [
+      {
+        "name": "process-csv-use-case-2-service",
+        "runtime": {
+          "podType": "regular-xs",
+          "runnerImage": "dataloopai/dtlpy-agent:cpu.py3.10.opencv",
+          "concurrency": 1,
+          "autoscaler": {
+            "minReplicas": 0,
+            "maxReplicas": 2,
+            "queueLength": 10
+          }
+        }
+      }
+    ],
+    "pipelineNodes": [
+      {
+        "invoke": {
+          "type": "function",
+          "namespace": "process-csv-use-case-2-service.process_csv_use_case_2_module.process_csv_use_case_2"
+        },
+        "name": "process_csv_use_case_2",
+        "categories": [],
+        "displayName": "Use Case 2 CSV Converter",
+        "description": "Converting Use Case 2 CSVs Converter into prompt items",
+        "scope": "project",
+        "configuration": {
+          "fields": [
+            {
+              "name": "name",
+              "title": "Node Name",
+              "props": {
+                "title": true,
+                "type": "string",
+                "default": "Use Case 1",
+                "required": true,
+                "placeholder": "Insert node name"
+              },
+              "rules": [
+                {
+                  "type": "required",
+                  "effect": "error"
+                }
+              ],
+              "widget": "dl-input"
+            }
+          ]
+        }
+      }
+    ],
+    "modules": [
+      {
+        "name": "process_csv_use_case_2_module",
+        "computeConfig": "process-csv-use-case-2",
+        "entryPoint": "modules/use_case_2/main.py",
+        "className": "ServiceRunner",
+        "initInputs": [],
+        "functions": [
+          {
+            "name": "process_csv_use_case_2",
+            "input": [
+              {
+                "type": "Item",
+                "name": "item"
+              }
+            ],
+            "output": [],
+            "displayIcon": "icon-dl-overview",
+            "displayName": "Use Case 2 CSV Converter"
+          }
+        ]
+      }
+    ]
+  }
+}
