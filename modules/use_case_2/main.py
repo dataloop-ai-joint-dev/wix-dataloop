@@ -138,3 +138,17 @@ class ServiceRunner(dl.BaseServiceRunner):
                     continue
 
         os.remove(csv_path)
+
+    @staticmethod
+    def process_dataset(dataset: dl.Dataset, query=None, progress=None):
+        if query:
+            filters = dl.Filters(custom_filter=query)
+        else:
+            filters = dl.Filters()
+        filters.add(field='metadata.system.mimetype', values="text/csv", method=dl.FILTERS_METHOD_OR)
+        filters.sort_by(field='id', value=dl.FiltersOrderByDirection.ASCENDING)
+        items = dataset.items.list(filters=filters).all()
+        for item in items:
+            ServiceRunner.process_csv_use_case_2(item)
+        
+        return dataset
