@@ -93,8 +93,40 @@
             "output": [],
             "displayIcon": "icon-dl-overview",
             "displayName": "Use Case 2 CSV Converter"
+          },
+          {
+            "name": "process_dataset",
+            "input": [
+              {
+                "type": "Dataset",
+                "name": "dataset"
+              },
+              {
+                "type": "Json",
+                "name": "query"
+              }
+            ],
+            "output": [
+              {
+                "type": "Dataset",
+                "name": "dataset"
+              }
+            ],
+            "displayIcon": "icon-dl-dataset-filled",
+            "displayName": "Use Case 2 CSV Converter"
           }
         ]
+      }
+    ],
+    "toolbars": [
+      {
+        "displayName": "Use Case 2 CSV Converter",
+        "invoke": {
+          "type": "function",
+          "namespace": "use-case-2.use_case_2_module.process_dataset"
+        },
+        "location": "datasetBrowserApps",
+        "icon": "icon-dl-edit"
       }
     ],
     "triggers": [

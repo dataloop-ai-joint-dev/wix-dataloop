@@ -75,6 +75,17 @@
         }
       }
     ],
+    "toolbars": [
+      {
+        "displayName": "Use Case 1 CSV Converter",
+        "invoke": {
+          "type": "function",
+          "namespace": "use-case-1.use_case_1_module.process_dataset"
+        },
+        "location": "datasetBrowserApps",
+        "icon": "icon-dl-edit"
+      }
+    ],
     "modules": [
       {
         "name": "use_case_1_module",
@@ -94,6 +105,27 @@
             "output": [],
             "displayIcon": "icon-dl-overview",
             "displayName": "Use Case 1 CSV Converter"
+          },
+          {
+            "name": "process_dataset",
+            "input": [
+              {
+                "type": "Dataset",
+                "name": "dataset"
+              },
+              {
+                "type": "Json",
+                "name": "query"
+              }
+            ],
+            "output": [
+              {
+                "type": "Dataset",
+                "name": "dataset"
+              }
+            ],
+            "displayIcon": "icon-dl-dataset-filled",
+            "displayName": "Use Case 2 CSV Converter"
           }
         ]
       }
