@@ -59,8 +59,8 @@ class ServiceRunner(dl.BaseServiceRunner):
                                 {
                                     "mimetype": dl.PromptType.TEXT,
                                     "value": "Please review the following website section layouts:\n\n"
-                                             + f"[Original Site URL]({row[FULL_URL_INDEX]})\n\n"
-                                             + f"[Review Site URL]({row[REVIEW_URL_INDEX]})\n\n"
+                                             + f"[Original Site URL]({row[FULL_URL_INDEX]})  |  "
+                                             + f"[Review Site URL]({row[REVIEW_URL_INDEX]})  |  "
                                              + f"[Original Section to Review]({row[ORIG_IMG_INDEX]})\n\n"
                                              + f"[Generated Section to Review]({row[GPT_URL_INDEX]})\n\n",
                                 }
@@ -68,7 +68,6 @@ class ServiceRunner(dl.BaseServiceRunner):
                         },
                         prompt_key="1",
                     )
-                    time.sleep(0.5)
                     prompt_item.add(
                         message={
                             "role": "assistant",
@@ -81,7 +80,7 @@ class ServiceRunner(dl.BaseServiceRunner):
                         },
                         prompt_key="1",
                     )
-                    time.sleep(0.5)
+                    time.sleep(1)
                     prompt_item.add(
                         message={
                             "role": "assistant",
@@ -94,7 +93,7 @@ class ServiceRunner(dl.BaseServiceRunner):
                         },
                         prompt_key="1",
                     )
-                    time.sleep(0.5)
+                    time.sleep(1)
                     prompt_item.add(
                         message={
                             "role": "assistant",
