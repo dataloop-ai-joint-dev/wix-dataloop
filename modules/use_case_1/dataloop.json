@@ -1,9 +1,9 @@
 {
-  "displayName": "Use Case 2 CSV Converter",
-  "name": "process_csv_use_case_2",
+  "displayName": "Use Case 1 CSV Converter",
+  "name": "process_csv_use_case_1",
   "scope": "project",
   "version": "0.0.1",
-  "description": "Converts Use Case 2 CSV files to Prompt Items",
+  "description": "Converts Use Case 1 CSV files to Prompt Items",
   "attributes": {
     "Category": "Application",
     "Provider": "Dataloop",
@@ -23,7 +23,7 @@
   "components": {
     "computeConfigs": [
       {
-        "name": "process-csv-use-case-2-service",
+        "name": "process-csv-use-case-1-service",
         "versions": {
           "dtlpy": " 1.99.7"
         },
@@ -43,12 +43,12 @@
       {
         "invoke": {
           "type": "function",
-          "namespace": "process-csv-use-case-2-service.process_csv_use_case_2_module.process_csv_use_case_2"
+          "namespace": "process-csv-use-case-1-service.process_csv_use_case_1_module.process_csv_use_case_1"
         },
-        "name": "process_csv_use_case_2",
+        "name": "process_csv_use_case_1",
         "categories": [],
-        "displayName": "Use Case 2 CSV Converter",
-        "description": "Converting Use Case 2 CSVs Converter into prompt items",
+        "displayName": "Use Case 1 CSV Converter",
+        "description": "Converting Use Case 1 CSVs Converter into prompt items",
         "scope": "project",
         "configuration": {
           "fields": [
@@ -76,14 +76,14 @@
     ],
     "modules": [
       {
-        "name": "process_csv_use_case_2_module",
-        "computeConfig": "process-csv-use-case-2",
-        "entryPoint": "modules/use_case_2/main.py",
+        "name": "process_csv_use_case_1_module",
+        "computeConfig": "process-csv-use-case-1",
+        "entryPoint": "modules/use_case_1/main.py",
         "className": "ServiceRunner",
         "initInputs": [],
         "functions": [
           {
-            "name": "process_csv_use_case_2",
+            "name": "process_csv_use_case_1",
             "input": [
               {
                 "type": "Item",
@@ -92,17 +92,17 @@
             ],
             "output": [],
             "displayIcon": "icon-dl-overview",
-            "displayName": "Use Case 2 CSV Converter"
+            "displayName": "Use Case 1 CSV Converter"
           }
         ]
       }
     ],
     "triggers": [
       {
-        "name": "use-case-2-on-item",
+        "name": "use-case-1-on-item",
         "active": true,
         "type": "Event",
-        "namespace": "process-csv-use-case-2-service.process_csv_use_case_2_module.process_csv_use_case_2",
+        "namespace": "services.process-csv-use-case-1-service",
         "spec": {
           "filter": {
             "$and": [
@@ -126,7 +126,7 @@
           "input": {},
           "operation": {
             "type": "function",
-            "functionName": "process_csv_use_case_2"
+            "functionName": "process_csv_use_case_1"
           }
         }
       }
